@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723426238e06de54086ad0a8abb83819, type: 3}
+  m_Name: Weapon_MagicUncommon
+  m_EditorClassIdentifier: 
+  itemType: 3
+  itemName: "\uB9C8\uBC95\uD2B9\uC218\uBB34\uAE30"
+  itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uBC1C\uC0AC\uC18D\uB3C4 10% \uC99D\uAC00"
+  itemIcon: {fileID: 21300000, guid: 866f50af525d1934b97994b38921c175, type: 3}
+  weaponType: 1
+  weaponLevel: 1
+  baseDamage: 4.5
+  baseCount: 1
+  damages:
+  - 0.5
+  - 1
+  - 1.5
+  - 2
+  - 3
+  counts:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 2
+  projectile: {fileID: 2807368470284944463, guid: 6c90d8fb8de81204dbca2bf0197d8b53, type: 3}
