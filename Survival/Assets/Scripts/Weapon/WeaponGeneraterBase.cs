@@ -10,10 +10,12 @@ public class WeaponGeneraterBase : MonoBehaviour
     protected ItemData data;
     
     [Header("발생기 기본 데이터")]
-    public WeaponType type;
-    public WeaponLevel level;
+    public WeaponType weaponType;
+    public WeaponLevel weaponLevel;
     public float cooltime = 1.0f;
     public int projectileConunt = 1;
+
+    protected int level;
 
     protected float Cooltime
     {
@@ -23,6 +25,10 @@ public class WeaponGeneraterBase : MonoBehaviour
             if (cooltime != value)
             {
                 cooltime = value;
+                if(cooltime < 0)
+                {
+                    cooltime = 0.01f;
+                }
                 createWaitTime = new WaitForSeconds(cooltime);
             }
         }
@@ -36,7 +42,13 @@ public class WeaponGeneraterBase : MonoBehaviour
         createWaitTime = new WaitForSeconds(Cooltime);
     }
 
-    public void Init(ItemData data, Transform parent)
+    public virtual void LevelUp(int level)
+    {
+        this.level = level;
+        Cooltime = data.BaseFireRate - data.FireRateDecrease * level;
+    }
+
+    public virtual void Init(ItemData data, Transform parent)
     {
         transform.parent = parent;
         transform.localPosition = Vector3.zero;
@@ -48,9 +60,8 @@ public class WeaponGeneraterBase : MonoBehaviour
     void DataSet()
     {
         name = "Generator: " + data.itemName;
-        type = data.weaponType;
-        level = data.weaponLevel;
-        projectileConunt = data.baseCount;
+        weaponType = data.weaponType;
+        weaponLevel = data.weaponLevel;
     }
 
     IEnumerator GenerateStarter()
@@ -58,7 +69,7 @@ public class WeaponGeneraterBase : MonoBehaviour
         while (true)
         {
             Cooltime = cooltime;
-            Generator(level, transform.position);
+            Generator(weaponLevel, transform.position);
             yield return createWaitTime;
         }
     }
@@ -66,7 +77,7 @@ public class WeaponGeneraterBase : MonoBehaviour
     protected virtual void Generator(WeaponLevel weaponLevel = WeaponLevel.Common, Vector3? position = null, Vector3? euler = null)
     {
         Weapon weapon = null;
-        switch (type)
+        switch (weaponType)
         {
             case WeaponType.Physical:
                 weapon = PhysicalWeaponFactory.Instance.GetWeapon(weaponLevel, position, euler);
@@ -79,10 +90,6 @@ public class WeaponGeneraterBase : MonoBehaviour
                 break;
             case WeaponType.Science:
                 break;
-        }
-        if (weapon != null)
-        {
-            weapon.Init(data);
         }
     }
 

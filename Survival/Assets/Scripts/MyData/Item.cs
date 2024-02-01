@@ -41,7 +41,7 @@ public class Item : MonoBehaviour
     private void OnEnable()
     {
         textLevel.text = $"Lv. {level + 1}";
-        textDesc.text = string.Format(data.itemDesc, data.damages[level]);
+        //textDesc.text = string.Format(data.itemDesc);
     }
 
     private void Start()
@@ -57,7 +57,7 @@ public class Item : MonoBehaviour
 
     public void OnClick()
     {
-        switch(data.itemType)
+        switch (data.itemType)
         {
             case ItemData.ItemType.ElementalMelee:
                 if(level == 0)
@@ -66,6 +66,7 @@ public class Item : MonoBehaviour
                     elementalMelee = newGenerator.AddComponent<ElementalMeleeGenerator>();
                     elementalMelee.Init(data, CenterPosition);
                 }
+                elementalMelee.LevelUp(level);
                 break;
             case ItemData.ItemType.MagicCommon:
                 if (level == 0)
@@ -109,7 +110,7 @@ public class Item : MonoBehaviour
         }
         level++;
 
-        if(level == data.damages.Length)
+        if (level == data.maxLevel)
         {
             GetComponent<Button>().interactable = false;
         }

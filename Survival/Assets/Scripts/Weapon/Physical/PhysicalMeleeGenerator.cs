@@ -13,11 +13,11 @@ public class PhysicalMeleeGenerator : WeaponGeneraterBase
     {
         if (transform.parent.localPosition.x > 0)
         {
-            base.Generator(level, transform.position, flipVec);
+            base.Generator(base.weaponLevel, transform.position, flipVec);
         }
         else
         {
-            base.Generator(level, transform.position, euler);
+            base.Generator(base.weaponLevel, transform.position, euler);
         }
     }
 }

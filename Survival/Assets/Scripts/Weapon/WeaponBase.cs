@@ -34,6 +34,8 @@ public class WeaponBase : Weapon
     Vector3 transformOriginRange;
     Transform target;
 
+    protected ItemData data;
+
     private void Awake()
     {
         if (TryGetComponent<Rigidbody2D>(out rigid))
@@ -47,7 +49,7 @@ public class WeaponBase : Weapon
             player = GameManager.Instance.Player;
         currPenetration = 0;
         target = player.scanner.nearestTarget;
-        RangeControl();
+        GuidedProjectile();
         StartCoroutine(LifeOver());
     }
 
@@ -61,7 +63,20 @@ public class WeaponBase : Weapon
 
     public override void Init(ItemData data)
     {
-        damage = data.baseDamage;
+        this.data = data;
+        Damage = data.baseDamage;
+        range = data.baseRange;
+        moveSpeed = data.baseSpeed;
+        penetration = data.basePenetration;
+    }
+
+    public override void LevelUp(int level)
+    {
+        Damage = data.baseDamage + data.damageIncrease * level;
+        range = data.baseRange + data.rangeIncrease * level;
+        moveSpeed = data.baseSpeed + data.speedIncrease * level;
+        penetration = data.basePenetration + data.penetrationIncrease * level;
+        RangeControl();
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -69,7 +84,7 @@ public class WeaponBase : Weapon
         if (collision.gameObject.CompareTag("Monster"))
         {
             CollisionAction();
-            if (penetration != -1)       // pernetration이 -1이면 무한관통
+            if (penetration > -1)       // pernetration이 -1이면 무한관통
             {
                 currPenetration++;
                 if (currPenetration > penetration)
@@ -92,14 +107,13 @@ public class WeaponBase : Weapon
         if (rigid != null)
         {
             rigid.transform.localScale *= range;
-            transform.localScale *= range;
         }
+        transform.localScale *= range;
     }
     protected virtual void MoveProjectile(float deltaTime, Vector3 direction)
     {
         //Debug.Log(direction);
         transform.Translate(deltaTime * moveSpeed * Vector3.left);
-        GuidedProjectile();
     }
 
     protected virtual void AdditionalAction()
@@ -113,14 +127,13 @@ public class WeaponBase : Weapon
 
     private void GuidedProjectile()
     {
-        if (isGuided && target != null)
+        if (isGuided)
         {
-            Direction = target.position - transform.position;
-            transform.right = -Direction;
-        }
-        else if(isGuided && target == null)
-        {
-            transform.right = -Direction;
+            if (target != null)
+            {
+                Direction = target.position - transform.position;
+                transform.right = -Direction;
+            }
         }
     }
 

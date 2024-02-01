@@ -6,6 +6,8 @@ public class LevelUp : MonoBehaviour
     Player player;
     Item[] items;
     public const int ItemSpaceCount = 3;
+    public int weaponCount = 5;
+    public int itemCount = 8;
     bool startSet = true;
 
     private void Awake()
@@ -48,7 +50,10 @@ public class LevelUp : MonoBehaviour
         while(true)
         {
             if (startSet)
-                length = 4;
+            {
+                length = weaponCount;
+                startSet = false;
+            }
 
             for(int i = 0; i < ItemSpaceCount; i++)
             {
@@ -56,22 +61,35 @@ public class LevelUp : MonoBehaviour
             }
 
 
-            if (randomItems[0] != randomItems[1] && randomItems[1] != randomItems[2] && randomItems[0] != randomItems[2])
+            if (DuplicationCheck(randomItems))
                 break;
         }
 
-        for(int i = 0; i < randomItems.Length; i++)
+        for(int i = 0; i < ItemSpaceCount; i++)
         {
             Item randomItem = items[randomItems[i]];
 
-            if(randomItem.level == randomItem.data.damages.Length)
+            if(randomItem.level == items[randomItems[i]].data.maxLevel)
             {
-                items[7].gameObject.SetActive(true);
+                items[itemCount-1].gameObject.SetActive(true);
             }
             else
             {
                 randomItem.gameObject.SetActive(true);
             }
         }
+    }
+
+    bool DuplicationCheck(int[] items)
+    {
+        for(int i = 0; i < ItemSpaceCount; i++)
+        {
+            for(int j = 0; j <= i; j++)
+            {
+                if (i != j && items[i] == items[j])
+                    return false;
+            }
+        }
+        return true;
     }
 }

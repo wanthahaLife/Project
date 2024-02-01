@@ -17,6 +17,19 @@ public class ElementalMeleeWeapon : WeaponBase
         base.OnDisable();
     }
 
+    public override void Init(ItemData data)
+    {
+        base.Init(data);
+        // 지속시간, 연사속도(생성기), 투사제개수(생성기)
+        LifeTime = data.baseDuration; 
+    }
+
+    public override void LevelUp(int level)
+    {
+        base.LevelUp(level);
+        LifeTime = data.baseDuration + LifeTime * level;
+    }
+
     protected override void MoveProjectile(float deltaTime, Vector3 direction)
     {
         /*Vector3 centerPosition = player.transform.GetChild((int)PlayerChild.CenterPosition).position;

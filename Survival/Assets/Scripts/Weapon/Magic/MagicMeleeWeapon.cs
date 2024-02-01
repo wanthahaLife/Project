@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class MagicMeleeWeapon : WeaponBase
 {
-    [Header("마법 근접 무기 데이터")]
-    public float flameGenTime = 0.5f;
-
-    float radius;
-    float elapsedTime;
+    //[Header("마법 근접 무기 데이터")]
+    //public float flameGenTime = 0.5f;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        radius = transform.localScale.x * 0.5f;
 
     }
 
@@ -21,6 +17,11 @@ public class MagicMeleeWeapon : WeaponBase
     {
         // 생성되고 플레이어 따라감
         transform.position = player.transform.position;
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     /*protected override void AdditionalAction()

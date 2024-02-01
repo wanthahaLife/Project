@@ -25,4 +25,5 @@ public abstract class Weapon : RecycleObject
     public float duration = 0.0f;
 
     public abstract void Init(ItemData data);
+    public abstract void LevelUp(int level);
 }

@@ -63,5 +63,23 @@ MonoBehaviour:
     level: 1
     startMin: 0
     startSec: 10
-    interval: 1
+    interval: 0.5
+    generateCount: 1
+  - type: 0
+    level: 2
+    startMin: 0
+    startSec: 20
+    interval: 0.7
+    generateCount: 1
+  - type: 0
+    level: 3
+    startMin: 0
+    startSec: 30
+    interval: 0.2
+    generateCount: 1
+  - type: 0
+    level: 4
+    startMin: 0
+    startSec: 40
+    interval: 0.5
     generateCount: 1

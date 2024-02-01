@@ -45,6 +45,11 @@ public class BurstBase : Weapon
     {
     }
 
+    public override void LevelUp(int level)
+    {
+        
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();

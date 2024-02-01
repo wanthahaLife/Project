@@ -11,6 +11,6 @@ public class MagicCommonGenerator : WeaponGeneraterBase
         float range = Random.Range(-createRange, createRange);
         Vector3 pos = transform.position;
         pos.y = transform.position.y + range;
-        base.Generator(level, pos, null);
+        base.Generator(base.weaponLevel, pos, null);
     }
 }

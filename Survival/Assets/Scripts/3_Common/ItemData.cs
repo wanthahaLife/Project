@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/ItemData")]
+[CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Object/ItemData")]
 public class ItemData : ScriptableObject
 {
     public enum ItemType
@@ -25,13 +25,24 @@ public class ItemData : ScriptableObject
     public Sprite itemIcon;
     public WeaponType weaponType;
     public WeaponLevel weaponLevel;
+    public int maxLevel = 10;
 
 
-    [Header("Level Data")]
+    [Header("Weapon Data")]
     public float baseDamage;
+    public float damageIncrease;
+    public float baseRange;
+    public float rangeIncrease;
     public int baseCount;
-    public float[] damages;
-    public float[] counts;
+    public int countIncrease;
+    public float baseSpeed;
+    public float speedIncrease;
+    public float BaseFireRate;
+    public float FireRateDecrease;
+    public float baseDuration;
+    public float DuraionIncrease;
+    public int basePenetration;
+    public int penetrationIncrease;
 
     [Header("Weapon")]
     public GameObject projectile;

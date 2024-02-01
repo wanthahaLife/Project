@@ -9,6 +9,20 @@ public class ElementalMeleeGenerator : WeaponGeneraterBase
     public float rotateSpeed = 30.0f;
 
     ElementalMeleeWeapon elementalMeleeWeapon;
+
+    public override void Init(ItemData data, Transform parent)
+    {
+        base.Init(data, parent);
+        projectileConunt = data.baseCount;
+        rotateSpeed = data.baseSpeed;
+    }
+
+    public override void LevelUp(int level)
+    {
+        base.LevelUp(level);
+        projectileConunt = data.baseCount + data.countIncrease * level;
+        rotateSpeed = data.baseSpeed + data.speedIncrease * level;
+    }
     protected override void Generator(WeaponLevel weaponLevel = WeaponLevel.Common, Vector3? position = null, Vector3? euler = null)
     {
         float angle = 360 / projectileConunt;
@@ -20,7 +34,6 @@ public class ElementalMeleeGenerator : WeaponGeneraterBase
             elementalMeleeWeapon.transform.Translate(elementalMeleeWeapon.transform.up * elementalMeleeWeapon.range, Space.World);
             elementalMeleeWeapon.Init(data);
         }
-        SetCooltime();
     }
     private void Update()
     {
@@ -30,9 +43,5 @@ public class ElementalMeleeGenerator : WeaponGeneraterBase
     private void RotateWeapon()
     {
         transform.Rotate(Time.deltaTime * -rotateSpeed * Vector3.forward);
-    }
-    private void SetCooltime()
-    {
-        Cooltime = Mathf.Max(Cooltime, elementalMeleeWeapon.LifeTime);
     }
 }

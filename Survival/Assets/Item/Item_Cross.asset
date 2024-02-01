@@ -14,22 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 5
   itemName: "\uC2ED\uC790\uAC00"
-  itemDesc: "\uC5F0\uC0AC\uC18D\uB3C4 {0} \uC99D\uAC00"
+  itemDesc: "\uC0DD\uC131\uC18D\uB3C4 {0} \uC99D\uAC00"
   itemIcon: {fileID: 21300000, guid: 9954b570cfa12ad4d9690fbc9fc54f5e, type: 3}
   weaponType: 0
   weaponLevel: 0
+  maxLevel: 10
   baseDamage: 0
+  damageIncrease: 0
+  baseRange: 0
+  rangeIncrease: 0
   baseCount: 0
-  damages:
-  - 0.1
-  - 0.2
-  - 0.35
-  - 0.5
-  - 0.75
-  counts:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  countIncrease: 0
+  baseSpeed: 0
+  speedIncrease: 0
+  BaseFireRate: 0
+  FireRateDecrease: 0
+  baseDuration: 0
+  DuraionIncrease: 0
+  basePenetration: 0
+  penetrationIncrease: 0
   projectile: {fileID: 0}
